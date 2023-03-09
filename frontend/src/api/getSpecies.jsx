@@ -49,7 +49,7 @@ export default function GetSpeciesButton() {
             setShowSpecies(true);
             console.log("Choose a species!")
         } else {
-            await axios.get(`http://localhost:8080/pets/species/${species}`).then((res) => {
+            await axios.get(`${baseURL}/pets/species/${species}`).then((res) => {
                 console.log(res);
 
                 if (res.status == 200) {
