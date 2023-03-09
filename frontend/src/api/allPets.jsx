@@ -9,8 +9,6 @@ export default function AllPetsButton() {
     const [pets, setPets] = useState();
     const [showPets, setShowPets] = useState(false);
 
-    console.log(baseURL);
-
     const loadPets = async () => {
         const petsData = await axios.get(`${baseURL}/pets/`);
 
