@@ -3,14 +3,6 @@ import { useState } from 'react';
 import { Button } from '@chakra-ui/react';
 import PetList from '../components/petListing.jsx';
 
-let baseURL = '';
-
-if (process.env.NODE_ENV === 'development') {
-  baseURL = 'http://localhost:8080';
-} else {
-  baseURL = 'https://petapi-production.up.railway.app';
-}
-
 export default function AllPetsButton() {
 
     const [pets, setPets] = useState();
