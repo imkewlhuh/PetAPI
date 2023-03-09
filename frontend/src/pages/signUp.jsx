@@ -5,6 +5,7 @@ import {
     Input, InputGroup, InputRightElement,
     Alert
 } from "@chakra-ui/react";
+import { baseURL } from '../constants.js';
 
 export default function SignUp(props) {
     const [newUser, setNewUser] = useState("");
@@ -26,7 +27,7 @@ export default function SignUp(props) {
 
             console.log(newAccount);
 
-            await axios.post("http://localhost:8080/auth/signup", newAccount).then((res) => {
+            await axios.post(`${baseURL}/auth/signup`, newAccount).then((res) => {
                 console.log(res);
 
                 if (res.status == 201) {

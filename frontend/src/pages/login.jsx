@@ -5,6 +5,7 @@ import {
     Input, InputGroup, InputRightElement,
     Alert
 } from "@chakra-ui/react";
+import { baseURL } from '../constants.js';
 
 export default function Login(props) {
     const [username, setUsername] = useState("");
@@ -22,7 +23,7 @@ export default function Login(props) {
 
         console.log(user);
 
-        await axios.post("http://localhost:8080/auth/login", user).then((res) => {
+        await axios.post(`${baseURL}/auth/login`, user).then((res) => {
             console.log(res);
 
             if (res.status == 200) {
