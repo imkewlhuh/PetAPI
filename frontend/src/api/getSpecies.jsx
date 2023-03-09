@@ -22,7 +22,13 @@ export default function GetSpeciesButton() {
 
             if (petsData.status == 200) {
                 let allPets = petsData.data.pets;
-                let allSpecies = allPets.map(pet => pet.species);
+                let allSpecies = [];
+                
+                allPets.forEach(pet => {
+                    if (!allSpecies.includes(pet.species)) {
+                        allSpecies.push(pet.species);
+                    }
+                });
 
                 console.log(allSpecies);
                 setSpeciesList(allSpecies);
