@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { Alert, Button } from '@chakra-ui/react';
+import { baseURL } from '../constants.js';
 
 export default function DeleteAllButton() {
     const [showInput, setShowInput] = useState(false);
@@ -9,7 +10,7 @@ export default function DeleteAllButton() {
 
     const deletePets = async () => {
         const token = sessionStorage.getItem("token");
-        await axios.delete("http://localhost:8080/pets/user", { headers: { Authorization: `Bearer ${token}` } }).then((res) => {
+        await axios.delete(`${baseURL}/pets/user`, { headers: { Authorization: `Bearer ${token}` } }).then((res) => {
             console.log(res);
 
             if (res.status == 200) {

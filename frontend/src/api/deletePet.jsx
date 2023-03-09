@@ -4,6 +4,7 @@ import {
     Button, FormControl, FormLabel, NumberInput,
     NumberInputField, Alert
 } from '@chakra-ui/react';
+import { baseURL } from '../constants.js';
 
 export default function DeletePetButton() {
     const [petId, setPetId] = useState();
@@ -14,7 +15,7 @@ export default function DeletePetButton() {
     const deletePet = async () => {
         const token = sessionStorage.getItem("token");
 
-        await axios.delete(`http://localhost:8080/pets/${petId}`, { headers: { Authorization: `Bearer ${token}` } }).then((res) => {
+        await axios.delete(`${baseURL}/pets/${petId}`, { headers: { Authorization: `Bearer ${token}` } }).then((res) => {
             console.log(res);
 
             if (res.status == 200) {

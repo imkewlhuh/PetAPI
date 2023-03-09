@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Box, Button } from '@chakra-ui/react';
 import PetList from '../components/petListing.jsx';
+import { baseURL } from '../constants.js';
 
 export default function UserPetsButton() {
     const [pets, setPets] = useState();
@@ -9,7 +10,7 @@ export default function UserPetsButton() {
 
     const userPets = async () => {
         const token = sessionStorage.getItem("token");
-        const petData = await axios.get("http://localhost:8080/pets/user", { headers: { Authorization: `Bearer ${token}` } });
+        const petData = await axios.get(`${baseURL}/pets/user`, { headers: { Authorization: `Bearer ${token}` } });
 
         console.log(petData);
 

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { Button, FormControl, FormLabel, Input, Alert } from '@chakra-ui/react';
+import { baseURL } from '../constants.js';
 
 export default function NewPetButton() {
     const [name, setName] = useState("");
@@ -19,7 +20,7 @@ export default function NewPetButton() {
             console.log(pet);
             const token = sessionStorage.getItem("token");
 
-            await axios.post("http://localhost:8080/pets/new", pet, { headers: { Authorization: `Bearer ${token}` } }).then((res) => {
+            await axios.post(`${baseURL}/pets/new`, pet, { headers: { Authorization: `Bearer ${token}` } }).then((res) => {
                 console.log(res);
 
                 if (res.status == 201) {

@@ -4,6 +4,7 @@ import {
     Button, FormControl, FormLabel, Input,
     NumberInput, NumberInputField, Alert
 } from '@chakra-ui/react';
+import { baseURL } from '../constants.js';
 
 export default function UpdatePetButton() {
     const [name, setName] = useState("");
@@ -23,7 +24,7 @@ export default function UpdatePetButton() {
             console.log(pet);
             const token = sessionStorage.getItem("token");
 
-            await axios.put(`http://localhost:8080/pets/${petId}`, pet, { headers: { Authorization: `Bearer ${token}` } }).then((res) => {
+            await axios.put(`${baseURL}/pets/${petId}`, pet, { headers: { Authorization: `Bearer ${token}` } }).then((res) => {
                 console.log(res);
 
                 if (res.status == 200) {

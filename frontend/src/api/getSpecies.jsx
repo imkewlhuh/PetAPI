@@ -5,6 +5,7 @@ import {
     Select, 
 } from '@chakra-ui/react';
 import PetList from '../components/petListing.jsx';
+import { baseURL } from '../constants.js';
 
 export default function GetSpeciesButton() {
     const [species, setSpecies] = useState("");
@@ -16,7 +17,7 @@ export default function GetSpeciesButton() {
 
     useEffect(() => {
         async function getList() {
-            const petsData = await axios.get("http://localhost:8080/pets/");
+            const petsData = await axios.get(`${baseURL}/pets`);
 
             console.log(petsData);
 

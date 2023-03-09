@@ -5,6 +5,7 @@ import {
     NumberInputField, Alert
 } from '@chakra-ui/react';
 import PetList from '../components/petListing.jsx';
+import { baseURL } from '../constants.js';
 
 export default function GetPetButton() {
     const [petId, setPetId] = useState();
@@ -15,7 +16,7 @@ export default function GetPetButton() {
 
     const getPet = async () => {
 
-        const petData = await axios.get(`http://localhost:8080/pets/${petId}`).then((res) => {
+        await axios.get(`${baseURL}/pets/${petId}`).then((res) => {
             console.log(res);
 
             if (res.status == 200) {
