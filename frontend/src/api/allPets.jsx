@@ -12,13 +12,12 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 export default function AllPetsButton() {
-    axios.defaults.baseURL = baseURL;
 
     const [pets, setPets] = useState();
     const [showPets, setShowPets] = useState(false);
 
     const loadPets = async () => {
-        const petsData = await axios.get("http://localhost:8080/pets/");
+        const petsData = await axios.get(`${baseURL}/pets/`);
 
         console.log(petsData);
 
