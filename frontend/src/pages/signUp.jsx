@@ -10,21 +10,36 @@ import { baseURL } from '../constants.js';
 export default function SignUp(props) {
     const [newUser, setNewUser] = useState("");
     const [newPass, setNewPass] = useState("");
-    const [newAccount, setNewAccount] = useState();
     const [show, setShow] = useState(false);
     const [showMsg, setShowMsg] = useState(false);
     const [error, setError] = useState(false);
     const togglePass = () => setShow(!show);
+
+    const loginNewUser = async (user) => {
+
+        await axios.post(`${baseURL}/auth/login`, user).then((res) => {
+            console.log(res);
+
+            if (res.status == 200) {
+                console.log("logged in");
+                sessionStorage.setItem("token", res.data.token);
+                props.loginUser(user.username);
+                setError(false);
+            };
+        }).catch(() =>
+            setError(true)
+        );
+    };
 
     const handleSignUp = async () => {
         if (newUser == "" || newPass == "") {
             console.log("Enter a new name and/or password!");
             setError(true);
         } else {
-            setNewAccount({
+            const newAccount = {
                 username: newUser,
                 password: newPass
-            });
+            };
 
             console.log(newAccount);
 
@@ -35,26 +50,12 @@ export default function SignUp(props) {
                     console.log("User created");
                     setShowMsg(true);
                     setError(false);
+                    loginNewUser(newAccount);
                 };
             }).catch(() =>
                 setError(true)
             );
         };
-    };
-
-    const loginNewUser = async () => {
-        await axios.post(`${baseURL}/auth/login`, newAccount).then((res) => {
-            console.log(res);
-
-            if (res.status == 200) {
-                console.log("logged in");
-                sessionStorage.setItem("token", res.data.token);
-                props.loginNewUser(newAccount.username);
-                setError(false);
-            };
-        }).catch(() =>
-            setError(true)
-        );
     };
 
     return (
@@ -82,7 +83,7 @@ export default function SignUp(props) {
                     </> : ""
                 }
                 <br />
-                <Button marginEnd={3} onClick={() => { handleSignUp(); if (!error) {loginNewUser()}; }} bgColor={"blue.200"}>Create Account</Button>
+                <Button marginEnd={3} onClick={handleSignUp} bgColor={"blue.200"}>Create Account</Button>
                 <Button marginEnd={3} bgColor={"blue.200"} onClick={() => props.LogIn()}>Log In</Button>
                 <Button onClick={() => { props.signInGuestUser() }} bgColor={"blue.200"}>Proceed as Guest</Button>
             </FormControl>
