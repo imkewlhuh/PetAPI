@@ -23,7 +23,7 @@ export default function SignUp(props) {
             if (res.status == 200) {
                 console.log("logged in");
                 sessionStorage.setItem("token", res.data.token);
-                props.loginUser(user.username);
+                props.loginNewUser(user.username);
                 setError(false);
             };
         }).catch(() =>
