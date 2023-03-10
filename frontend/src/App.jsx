@@ -23,13 +23,16 @@ function App() {
               setIsUserLoggedIn(true);
               setGuest(true);
             }} loginUser={(username) => {
-              setIsUserLoggedIn(true);
               setName(username);
+              setIsUserLoggedIn(true);
             }} signUp={() => setShowLogin(false)} />
             :
             <SignUp signInGuestUser={() => {
               setIsUserLoggedIn(true);
               setGuest(true);
+            }} loginNewUser={(username) => {
+              setName(username);
+              setIsUserLoggedIn(true);
             }} LogIn={() => setShowLogin(true)} />
           }
         </Container> :
